@@ -1,0 +1,15 @@
+#!/bin/bash
+make && make install
+sleep 1
+modprobe -r ath9k
+modprobe -r ath9k_htc
+modprobe -r mac80211
+sleep 1
+modprobe mac80211
+sleep 1
+modprobe ath9k
+sleep 3
+ifconfig wlan0 10.1.1.1 netmask 255.255.255.0 up
+hostapd -d hostapd.conf
+#hostapd -d hostapd.conf
+#hostapd -d hostapd-ht40.conf

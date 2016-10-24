@@ -1,0 +1,4 @@
+#!/bin/bash
+cat /dev/null > /var/log/syslog
+cat /dev/null > /var/log/kern.log
+iperf -s -u -i 1s -w 1M

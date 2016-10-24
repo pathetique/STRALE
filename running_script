@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#./running_script (max A-MPDU size) (length adaptation on/off) (rate adaptation on/off) (speed) (seed)
+VERSION="simple_test"
+RESULT_DIR="/home/cmyang/measurement/journal/${VERSION}"
+AWK_DIR="/home/cmyang/awks/journal/${VERSION}"
+
+#mkdir ${VERSION_DIR}
+mkdir ${RESULT_DIR}
+mkdir ${AWK_DIR}
+
+iwconfig wlan0 retry 0
+iwconfig wlan0 txpower 3
+echo $1 >> /sys/kernel/debug/ieee80211/phy*/lgu/aggr_time
+echo 1 >> /sys/kernel/debug/ieee80211/phy*/lgu/aggr_index
+echo 42 >> /sys/kernel/debug/ieee80211/phy*/lgu/aggr_num
+echo $2 >> /sys/kernel/debug/ieee80211/phy*/lgu/algorithm_onoff
+echo 2000 >> /sys/kernel/debug/ieee80211/phy*/fixed_rate
+echo 0 >> /sys/kernel/debug/ieee80211/phy*/lgu/stbc
+echo $3 >> /sys/kernel/debug/ieee80211/phy0/lgu/rateCtrl_threshold
+
+iperf -c 10.1.1.2 -u -w 1M -b 500M -t 4 -i 1 
+sleep 2
+
+echo iperf run aggrTime $1 minstrel_ht mobility $4 m/s seed $5
+cat /dev/null > /var/log/syslog
+iperf -c 10.1.1.2 -u -w 1M -b 150M -t 90 -i 1s
+cp /var/log/syslog ${RESULT_DIR}/time_$1-algo_$2-rc_$3-mob_$4-seed_$5.txt
+echo done

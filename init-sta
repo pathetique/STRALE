@@ -1,0 +1,13 @@
+#!/bin/bash
+make && make install
+sleep 1
+modprobe -r ath9k
+modprobe -r ath9k_htc
+modprobe -r mac80211
+sleep 1
+modprobe mac80211
+sleep 1
+modprobe ath9k
+sleep 3
+ifconfig wlan0 40.0.0.2 netmask 255.255.255.0 up
+iwconfig wlan0 essid C2600_5G

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#./iperf_tx (max A-MPDU size) (length adaptation on/off) (rate adaptation on/off)
+iwconfig wlan0 retry 1
+iwconfig wlan0 txpower 15
+echo $1 >> /sys/kernel/debug/ieee80211/phy0/lgu/aggr_time
+echo 42 >> /sys/kernel/debug/ieee80211/phy0/lgu/aggr_num
+echo $2 >> /sys/kernel/debug/ieee80211/phy0/lgu/algorithm_onoff
+echo -1 >> /sys/kernel/debug/ieee80211/phy0/rc/fixed_rate_idx
+#echo 1 >> /sys/kernel/debug/ieee80211/phy0/lgu/rateCtrl_threshold
+
+#iperf -c 10.1.1.2 -u -w 1M -b 500M -t 4 -i 1 
+#sleep 2
+
+echo iperf run aggrTime $1 minstrel_ht
+cat /dev/null > /var/log/syslog
+iperf -c 10.1.1.5 -u -w 1M -b $3 -t 3000 -i 1s
+echo done

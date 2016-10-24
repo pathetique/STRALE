@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo rfkill unblock wifi
+sudo rfkill unblock all
+sudo lshw -class network
