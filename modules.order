@@ -1,8 +1,8 @@
-kernel//home/mwnl/backports-strale/compat/compat.ko
-kernel//home/mwnl/backports-strale/drivers/net/wireless/ath/ath9k/ath9k.ko
-kernel//home/mwnl/backports-strale/drivers/net/wireless/ath/ath9k/ath9k_hw.ko
-kernel//home/mwnl/backports-strale/drivers/net/wireless/ath/ath9k/ath9k_common.ko
-kernel//home/mwnl/backports-strale/drivers/net/wireless/ath/ath9k/ath9k_htc.ko
-kernel//home/mwnl/backports-strale/drivers/net/wireless/ath/ath.ko
-kernel//home/mwnl/backports-strale/net/wireless/cfg80211.ko
-kernel//home/mwnl/backports-strale/net/mac80211/mac80211.ko
+kernel//home/mwnl/STRALE/compat/compat.ko
+kernel//home/mwnl/STRALE/drivers/net/wireless/ath/ath9k/ath9k.ko
+kernel//home/mwnl/STRALE/drivers/net/wireless/ath/ath9k/ath9k_hw.ko
+kernel//home/mwnl/STRALE/drivers/net/wireless/ath/ath9k/ath9k_common.ko
+kernel//home/mwnl/STRALE/drivers/net/wireless/ath/ath9k/ath9k_htc.ko
+kernel//home/mwnl/STRALE/drivers/net/wireless/ath/ath.ko
+kernel//home/mwnl/STRALE/net/wireless/cfg80211.ko
+kernel//home/mwnl/STRALE/net/mac80211/mac80211.ko

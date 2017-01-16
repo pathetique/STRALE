@@ -1,0 +1,14 @@
+#!/bin/bash
+MOB=$1
+SEED=$2
+if [ $3 -eq 0 ]; then
+	echo RUNNING MoFA $1 $2 $3
+	./running_script_mofa $1 $2
+else
+	echo RUNNING eMoFA $1 $2 $3
+	./running_script 10240 0 0 ${MOB} ${SEED}
+	./running_script 4096 0 0 ${MOB} ${SEED}
+	./running_script 900 0 0 ${MOB} ${SEED}
+	./running_script 10240 1 0 ${MOB} ${SEED}
+	./running_script 10240 1 1500 ${MOB} ${SEED}
+fi
