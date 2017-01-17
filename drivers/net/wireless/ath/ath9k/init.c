@@ -957,13 +957,13 @@ int ath9k_init_device(u16 devid, struct ath_softc *sc,
 	sc->rateCtrl_threshold = 1500;
 	sc->aggr_num = ATH_AMPDU_SUBFRAME_DEFAULT;
 	sc->stbc = 0;
-	sc->emofa_on = 0;
+	sc->strale_on = 0;
 	
-	sc->aggr_dir = debugfs_create_dir("lgu", hw->wiphy->debugfsdir);
+	sc->aggr_dir = debugfs_create_dir("strale", hw->wiphy->debugfsdir);
 	debugfs_create_u32("aggr_num", S_IRUSR | S_IWUSR, sc->aggr_dir, &sc->aggr_num);
 	debugfs_create_u32("aggr_time", S_IRUSR | S_IWUSR, sc->aggr_dir ,&sc->aggr_time);
 	debugfs_create_u32("rateCtrl_threshold", S_IRUSR | S_IWUSR, sc->aggr_dir ,&sc->rateCtrl_threshold);
-	debugfs_create_u32("algorithm_onoff", S_IRUSR | S_IWUSR, sc->aggr_dir ,&sc->emofa_on);
+	debugfs_create_u32("algorithm_onoff", S_IRUSR | S_IWUSR, sc->aggr_dir ,&sc->strale_on);
 	//journal end
 
 	error = ath9k_init_debug(ah);

@@ -997,7 +997,7 @@ struct ath_softc {
   	u32 rateCtrl_threshold;
   	u32 aggr_num;
 	u32 stbc;
-	u32 emofa_on;
+	u32 strale_on;
 
 	struct dentry *aggr_dir;
 

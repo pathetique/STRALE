@@ -1214,13 +1214,13 @@ static void ath_tx_complete_aggr(struct ath_softc *sc, struct ath_txq *txq,
 					printk(KERN_DEBUG "Acceptable frame length!!\n");
 				*/
 				//journal shbyeon 
-				if(sc->emofa_on > 0 && !(tx_info->flags & IEEE80211_TX_CTL_RATE_CTRL_PROBE))
+				if(sc->strale_on > 0 && !(tx_info->flags & IEEE80211_TX_CTL_RATE_CTRL_PROBE))
 				{
 					//update_aggr(sc, an, tidno, rate_idx, nframes, ampdu_length, sta);
 					update_aggr(sc, an, tidno, rate_idx, nframes, ampdu_length, sta, ht40, sgi);
 					rtscts_control(an, tidno, *hw_retry, rtscts_usage);
 				}
-				else if(sc->emofa_on == 0)
+				else if(sc->strale_on == 0)
 				{
 					an->aggr_num[tidno] = sc->aggr_num;
 					an->aggr_time[tidno] = sc->aggr_time;
@@ -1696,7 +1696,7 @@ ath_tx_form_aggr(struct ath_softc *sc, struct ath_txq *txq,
 	}
 
 	*aggr_len = al;
-	//printk(KERN_DEBUG "aggr_len in ath_tx_form_aggr %d\n", *aggr_len);
+	printk(KERN_DEBUG "aggr_len in ath_tx_form_aggr %d\n", *aggr_len);
 
 	return closed;
 #undef PADBYTES
@@ -1797,13 +1797,13 @@ void ath_update_max_aggr_framelen(struct ath_softc *sc, int queue, int txop,
 	int txop_backup = txop;
 
 	/* 4ms is the default (and maximum) duration */
-	/* journal emofa_on ?? */
+	/* journal strale_on ?? */
 	/*
 	if (!txop || txop > 4096)
 		txop = 4096;
 	*/
 	if (!txop) {
-		if(an && sc->emofa_on)	{
+		if(an && sc->strale_on)	{
 			txop = an->aggr_time[tidno];
 			//printk(KERN_DEBUG "aggr_time updated to %d\n", an->aggr_time[tidno]);	//journal
 		}
@@ -1937,7 +1937,7 @@ static void ath_buf_set_rate(struct ath_softc *sc, struct ath_buf *bf,
 		hw = sc->hw;
 		sta = ieee80211_find_sta_by_ifaddr(hw, hdr->addr1, hdr->addr2);
 
-		if(!(tx_info->flags & IEEE80211_TX_CTL_RATE_CTRL_PROBE) && sc->emofa_on)
+		if(!(tx_info->flags & IEEE80211_TX_CTL_RATE_CTRL_PROBE) && sc->strale_on)
 		{
 			an = (struct ath_node *)sta->drv_priv;
 			tidno = ieee80211_get_qos_ctl(hdr)[0] & IEEE80211_QOS_CTL_TID_MASK;
